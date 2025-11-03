@@ -19,19 +19,33 @@ class TestStatisticsService(unittest.TestCase):
             PlayerReaderStub()
         )
 
-    def test_pelaaja_loytyy(self):
-        for player in self.stats._players:
-            if "Kurri" in player.name:
-                palautus = player
-                
-        self.assertAlmostEqual(str(palautus), "Kurri EDM 37 + 53 = 90")
+    def test_konstruktori_luo_pelaajatiedot_oikein(self):
+        players = [str(player) for player in self.stats._players]
+        real_players = [
+            "Semenko EDM 4 + 12 = 16",
+            "Lemieux PIT 45 + 54 = 99",
+            "Kurri EDM 37 + 53 = 90",
+            "Yzerman DET 42 + 56 = 98",
+            "Gretzky EDM 35 + 89 = 124"
+        ]
 
-    def test_pelaajaa_ei_loydy(self):
-        loytyy = None
-        for player in self.stats._players:
-            if "Turri" in player.name:
-                loytyy = True
-                
-        self.assertAlmostEqual(loytyy, None)
+        self.assertEqual(players, real_players)
 
-    
+    def test_haettu_pelaaja_loytyy(self):
+        result = None
+        for player in self.stats._players:
+            if "Gretzky" in player.name:
+                result = player
+
+        real_result = self.stats._players[4]
+
+        self.assertEqual(result, real_result)
+
+    def test_haettua_pelaajaa_ei_ole(self):
+        result = None
+        for player in self.stats._players:
+            if "Bretzky" in player.name:
+                result = player
+
+        self.assertIsNone(result)
+
