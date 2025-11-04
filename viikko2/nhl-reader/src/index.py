@@ -16,7 +16,9 @@ def main():
     print(f"Players from {nationality}:")
     print()
 
-    for player in players:
+    players.sort(key=lambda player: player.points)
+    
+    for player in reversed(players):
         if player.nation == nationality:
             print(player)
 
