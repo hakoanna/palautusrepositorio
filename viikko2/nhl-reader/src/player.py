@@ -4,14 +4,14 @@ class Player:
     def __init__(self, dict):
         self.name = dict['name']
         self.nationality = dict['nationality']
-        self.team = dict['team']
+        self.teams = dict['team']
         self.games = dict['games']
         self.goals = dict['goals']
         self.assists = dict['assists']
         self.points = self.goals + self.assists
     
     def __str__(self):
-        return f"{self.name:20} {self.team:15} {self.goals} + {self.assists} = {self.goals + self.assists}"
+        return f"{self.name:20} {self.teams:15} {self.goals} + {self.assists} = {self.goals + self.assists}"
     
 
 class PlayerReader:
@@ -38,6 +38,6 @@ class PlayerStats:
     
         for player in reversed(self.players):
             if player.nationality == nationality:
-                result.append(str(player))
+                result.append([player.name, player.teams, player.goals, player.assists, player.points])
 
         return result
