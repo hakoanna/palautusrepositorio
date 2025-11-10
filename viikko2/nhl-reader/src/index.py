@@ -1,6 +1,6 @@
-from player import PlayerReader, PlayerStats
 from rich.console import Console
 from rich.table import Table
+from player import PlayerReader, PlayerStats
 
 
 def main():
@@ -11,7 +11,11 @@ def main():
     reader = PlayerReader(url)
     stats = PlayerStats(reader)
     players = stats.top_scorers_by_nationality(nationality)
+    console = Console()
+    console.print(create_table(players, season, nationality))
 
+
+def create_table(players, season, nationality):
     table = Table(title=f"Season {season} players from {nationality}")
 
     table.add_column("Player", style="cyan")
@@ -23,8 +27,7 @@ def main():
     for player in players:
         table.add_row(str(player[0]), str(player[1]), str(player[2]), str(player[3]), str(player[4]))
 
-    console = Console()
-    console.print(table)
+    return table
 
 if __name__ == '__main__':
     main()
