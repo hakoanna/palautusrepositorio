@@ -1,18 +1,18 @@
 import requests
 
 class Player:
-    def __init__(self, dict):
-        self.name = dict['name']
-        self.nationality = dict['nationality']
-        self.teams = dict['team']
-        self.games = dict['games']
-        self.goals = dict['goals']
-        self.assists = dict['assists']
+    def __init__(self, dict_in_question):
+        self.name = dict_in_question['name']
+        self.nationality = dict_in_question['nationality']
+        self.teams = dict_in_question['team']
+        self.games = dict_in_question['games']
+        self.goals = dict_in_question['goals']
+        self.assists = dict_in_question['assists']
         self.points = self.goals + self.assists
-    
+
     def __str__(self):
-        return f"{self.name:20} {self.teams:15} {self.goals} + {self.assists} = {self.goals + self.assists}"
-    
+        return f"{self.name:20} {self.teams:15} {self.goals} + {self.assists} = {self.points}"
+
 
 class PlayerReader:
     def __init__(self, url):
@@ -35,9 +35,10 @@ class PlayerStats:
         self.players.sort(key=lambda player: player.points)
 
         result = []
-    
+
         for player in reversed(self.players):
             if player.nationality == nationality:
-                result.append([player.name, player.teams, player.goals, player.assists, player.points])
+                info = [player.name, player.teams, player.goals, player.assists, player.points]
+                result.append(info)
 
         return result
