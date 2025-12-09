@@ -81,7 +81,7 @@ class Kayttoliittyma:
         else:
             self._nollaus_painike["state"] = constants.NORMAL
 
-        self._edellinen_arvo = int(self._arvo_var.get())
+        self._edellinen_arvo  = int(self._arvo_var.get())
         self._syote_kentta.delete(0, constants.END)
         self._arvo_var.set(self._sovelluslogiikka.arvo())
 
